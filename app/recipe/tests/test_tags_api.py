@@ -2,6 +2,7 @@
 Tests for the tags API.
 """
 from decimal import Decimal
+
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import TestCase
@@ -12,15 +13,16 @@ from rest_framework.test import APIClient
 from core.models import (
     Tag,
     Recipe,
-    )
+)
 
 from recipe.serializers import TagSerializer
+
 
 TAGS_URL = reverse('recipe:tag-list')
 
 
 def detail_url(tag_id):
-    """Create and return a tag detail URL."""
+    """Create and return a tag detail url."""
     return reverse('recipe:tag-detail', args=[tag_id])
 
 
@@ -66,7 +68,7 @@ class PrivateTagsApiTests(TestCase):
         """Test list of tags is limited to authenticated user."""
         user2 = create_user(email='user2@example.com')
         Tag.objects.create(user=user2, name='Fruity')
-        tag = Tag.objects.create(user=self.user, name='Comfort Foof')
+        tag = Tag.objects.create(user=self.user, name='Comfort Food')
 
         res = self.client.get(TAGS_URL)
 
@@ -106,7 +108,7 @@ class PrivateTagsApiTests(TestCase):
             title='Green Eggs on Toast',
             time_minutes=10,
             price=Decimal('2.50'),
-            user=self.user
+            user=self.user,
         )
         recipe.tags.add(tag1)
 
@@ -125,14 +127,14 @@ class PrivateTagsApiTests(TestCase):
         recipe1 = Recipe.objects.create(
             title='Pancakes',
             time_minutes=50,
-            price=Decimal('5.50'),
-            user=self.user
+            price=Decimal('5.00'),
+            user=self.user,
         )
         recipe2 = Recipe.objects.create(
             title='Porridge',
             time_minutes=3,
             price=Decimal('2.00'),
-            user=self.user
+            user=self.user,
         )
         recipe1.tags.add(tag)
         recipe2.tags.add(tag)
