@@ -7,13 +7,13 @@ services:
     restart: always
     volumes:
       - static-data:/vol/web
-    enviroment:
-    - DB_HOST=db
-    - DB_NAME=${DB_NAME}
-    - DB_USER=${DB_USER}
-    - DB_PASS=${DB_PASS}
-    - SECRET_KEY=${DJANGO_SECRET_KEY}
-    - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
+      - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
     depends_on:
       - db
 
@@ -21,8 +21,8 @@ services:
     image: postgres:13-alpine
     restart: always
     volumes:
-      - postgres-data:/var/lib/postgres/data
-    enviroment:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
@@ -34,7 +34,7 @@ services:
     depends_on:
       - app
     ports:
-      - 8000:8000
+      - 80:8000
     volumes:
       - static-data:/vol/static
 
