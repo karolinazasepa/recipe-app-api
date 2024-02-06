@@ -353,7 +353,7 @@ class PrivateRecipeApiTests(TestCase):
         new_ingredient = Ingredient.objects.get(user=self.user, name='Limes')
         self.assertIn(new_ingredient, recipe.ingredients.all())
 
-    def test_update_recipe_assign_ingredients(self):
+    def test_update_recipe_assign_ingredient(self):
         """Test assigning an existing ingredient when updating a recipe."""
         ingredient1 = Ingredient.objects.create(user=self.user, name='Pepper')
         recipe = create_recipe(user=self.user)
@@ -384,7 +384,7 @@ class PrivateRecipeApiTests(TestCase):
     def test_filter_by_tags(self):
         """Test filtering recipes by tags."""
         r1 = create_recipe(user=self.user, title='Thai Vegetable Curry')
-        r2 = create_recipe(user=self.user, title='TAubergine with Tahini')
+        r2 = create_recipe(user=self.user, title='Aubergine with Tahini')
         tag1 = Tag.objects.create(user=self.user, name='Vegan')
         tag2 = Tag.objects.create(user=self.user, name='Vegetarian')
         r1.tags.add(tag1)

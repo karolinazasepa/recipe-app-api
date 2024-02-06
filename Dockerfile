@@ -1,5 +1,5 @@
 FROM python:3.9-alpine3.13
-LABEL maintainer="karolinazasepa"
+LABEL maintainer="londonappdeveloper.com"
 
 ENV PYTHONUNBUFFERED 1
 
@@ -26,10 +26,10 @@ RUN python -m venv /py && \
         --disabled-password \
         --no-create-home \
         django-user && \
-    mkdir -p /vol/static/media && \
+    mkdir -p /vol/web/media && \
     mkdir -p /vol/web/static && \
-    chown -R django-user:django-user /vol/ && \
-    chmod -R 755 /vol/web && \
+    chown -R django-user:django-user /vol && \
+    chmod -R 755 /vol && \
     chmod -R +x /scripts
 
 ENV PATH="/scripts:/py/bin:$PATH"

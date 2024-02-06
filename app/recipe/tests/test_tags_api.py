@@ -100,7 +100,7 @@ class PrivateTagsApiTests(TestCase):
         tags = Tag.objects.filter(user=self.user)
         self.assertFalse(tags.exists())
 
-    def test_filtered_tags_assigned_to_recipes(self):
+    def test_filter_tags_assigned_to_recipes(self):
         """Test listing tags to those assigned to recipes."""
         tag1 = Tag.objects.create(user=self.user, name='Breakfast')
         tag2 = Tag.objects.create(user=self.user, name='Lunch')
@@ -126,7 +126,7 @@ class PrivateTagsApiTests(TestCase):
         Tag.objects.create(user=self.user, name='Dinner')
         recipe1 = Recipe.objects.create(
             title='Pancakes',
-            time_minutes=50,
+            time_minutes=5,
             price=Decimal('5.00'),
             user=self.user,
         )
